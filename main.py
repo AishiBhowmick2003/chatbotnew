@@ -68,7 +68,7 @@ qa_chain = ConversationalRetrievalChain.from_llm(
 )
 
 def is_on_topic(query: str) -> bool:
-    keywords = ["brain tumor", "glioblastoma", "MRI", "surgery", "radiation", "tumor", "brain cancer", "treatment", "biopsy", "grading","explain","detail","elaborate","understand","other symptoms","brain tumor", "brain tumour", "tumor", "tumour", "brain", "mass", "lesion",
+    keywords = ["hi","hello","explain","details","name","What do you do?","research","brain","mortality","risk","symptoms","brain tumor", "glioblastoma", "MRI", "surgery", "radiation", "tumor", "brain cancer", "treatment", "biopsy", "grading","explain","detail","elaborate","understand","other symptoms","brain tumor", "brain tumour", "tumor", "tumour", "brain", "mass", "lesion",
     "glioblastoma", "astrocytoma", "oligodendroglioma", "meningioma", "ependymoma",
     "medulloblastoma", "schwannoma", "craniopharyngioma", "pituitary adenoma",
     "choroid plexus tumor", "pineoblastoma", "glioma", "metastatic tumor",
