@@ -92,6 +92,33 @@ def is_on_topic(query: str) -> bool:
     ]
     query = query.lower()
     return any(keyword in query for keyword in keywords)
+from langchain_community.document_loaders import PyMuPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+PDF_FILE = "./BrainTumorGuidev12.1.pdf"
+
+def build_faiss_index():
+    if not os.path.exists(PDF_FILE):
+        raise FileNotFoundError(f"PDF file '{PDF_FILE}' not found!")
+
+    loader = PyMuPDFLoader(PDF_FILE)
+    documents = loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    docs = text_splitter.split_documents(documents)
+
+    db = FAISS.from_documents(docs, embedding_model)
+    db.save_local(DB_FAISS_PATH)
+    return db
+if os.path.exists(DB_FAISS_PATH):
+    try:
+        db = FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
+    except Exception as e:
+        print(f"Failed to load FAISS index: {e}")
+        db = build_faiss_index()
+else:
+    print("FAISS index not found. Rebuilding...")
+    db = build_faiss_index()
 
 @app.post("/ask")
 def ask_question(request: QueryRequest):
