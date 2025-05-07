@@ -10,7 +10,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 PDF_FILE = "./BrainTumorGuidev12.1.pdf"
-DB_FAISS_PATH = "./db_faiss"
+DB_FAISS_PATH = "./chatbot_model/db_faiss"
 HUGGINGFACE_API_KEY = "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"
 HUGGINGFACE_REPO_ID = "mistralai/Mistral-7B-Instruct-v0.3"
 
