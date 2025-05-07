@@ -8,7 +8,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 
 PDF_FILE = r"C:\Users\bhowm\OneDrive\Documents\DeployNewChatbot-main\BrainTumorGuidev12.1.pdf"  # Replace with your PDF file name
-DB_FAISS_PATH = "./chatbot_model/db_faiss"
+DB_FAISS_PATH = os.path.abspath("./chatbot_model/db_faiss")
 
 if not os.path.exists(PDF_FILE):
     raise FileNotFoundError(f" PDF file '{PDF_FILE}' not found!")
