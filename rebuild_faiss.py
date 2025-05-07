@@ -5,7 +5,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 PDF_FILE = "./BrainTumorGuidev12.1.pdf"
-DB_FAISS_PATH = "./db_faiss"
+DB_FAISS_PATH = "./chatbot_model/db_faiss"
 
 if not os.path.exists(PDF_FILE):
     raise FileNotFoundError(f"PDF file '{PDF_FILE}' not found!")
