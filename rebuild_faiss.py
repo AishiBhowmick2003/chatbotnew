@@ -1,17 +1,14 @@
-
 import os
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 
-
-PDF_FILE = r"C:\Users\bhowm\OneDrive\Documents\DeployNewChatbot-main\BrainTumorGuidev12.1.pdf"  # Replace with your PDF file name
-DB_FAISS_PATH = os.path.abspath("./db_faiss")
+PDF_FILE = "./BrainTumorGuidev12.1.pdf"
+DB_FAISS_PATH = "./db_faiss"
 
 if not os.path.exists(PDF_FILE):
-    raise FileNotFoundError(f" PDF file '{PDF_FILE}' not found!")
+    raise FileNotFoundError(f"PDF file '{PDF_FILE}' not found!")
 
 loader = PyMuPDFLoader(PDF_FILE)
 documents = loader.load()
@@ -23,4 +20,5 @@ embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-Mi
 db = FAISS.from_documents(docs, embedding_model)
 
 db.save_local(DB_FAISS_PATH)
-print("FAISS index rebuilt successfully from the single PDF!")
+print("FAISS index rebuilt successfully from the PDF!")
+
