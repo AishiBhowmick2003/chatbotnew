@@ -122,7 +122,7 @@ async def chat(request: QueryRequest):
     query = request.query.strip()
 
     if not is_on_topic(query):
-        raise HTTPException(status_code=400, detail="❌ Query is off-topic. Please ask about brain tumor-related topics.")
+        raise HTTPException(status_code=400, detail="Query is off-topic. Please ask about brain tumor-related topics.")
 
     try:
         result = qa_chain.invoke({"question": query})
@@ -130,7 +130,7 @@ async def chat(request: QueryRequest):
         clean_answer = answer.split("Unhelpful Answer:")[0].strip()
         return {"response": clean_answer}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"💥 Error generating response: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
 
 
 
